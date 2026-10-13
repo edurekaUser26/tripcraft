@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppHeader from "./components/AppHeader.jsx";
 import TripSummary from "./components/TripSummary.jsx";
 import DayTimeline from "./components/DayTimeline.jsx";
@@ -9,22 +9,13 @@ import ItineraryPanel from "./components/ItineraryPanel.jsx";
 import AddStopForm from "./components/AddStopForm.jsx";
 import DayFilter from "./components/DayFilter.jsx";
 import DepartureCountdown from "./components/DepartureCountdown.jsx";
-import { days, trip } from "./data/trip.js";
+import { trip } from "./data/trip.js";
+import { TripContext } from "./features/trip/TripContext.jsx";
 
 function App() {
-  const [itinerary, setItinerary] = useState(days);
+  const { state } = useContext(TripContext);
+  const itinerary = state.days;
   const [selectedDay, setSelectedDay] = useState("all");
-  const [lastAddedId, setLastAddedId] = useState(null);
-  function handleAddStop(dayNumber, newStop) {
-    setItinerary(
-      itinerary.map((day) =>
-        day.number === dayNumber
-          ? { ...day, stops: [...day.stops, newStop] }
-          : day,
-      ),
-    );
-    setLastAddedId(newStop.id);
-  }
   const visibleDays =
     selectedDay === "all"
       ? itinerary
@@ -51,13 +42,13 @@ function App() {
 
         <div className="md:col-span-2">
           <ItineraryPanel>
-            <AddStopForm days={itinerary} onAddStop={handleAddStop} />
+               <AddStopForm days={itinerary} />
             <DayFilter
               days={itinerary}
               selectedDay={selectedDay}
               onSelectDay={setSelectedDay}
             />
-            <DayTimeline days={visibleDays} lastAddedId={lastAddedId} />
+            <DayTimeline days={visibleDays} lastAddedId={state.lastAddedId} />
           </ItineraryPanel>
         </div>
 

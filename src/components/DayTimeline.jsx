@@ -8,13 +8,17 @@ function DayTimeline({ days, lastAddedId }) {
           <h3 className="font-semibold">Day {day.number}</h3>
           {day.stops.length > 0 ? (
             <ul className="mt-2 space-y-2">
-              {day.stops.map((stop) => (
+              {day.stops.map((stop, index) => (
                 <StopCard
                   key={stop.id}
+                  id={stop.id}
+                  dayNumber={day.number}
                   time={stop.time}
                   name={stop.name}
                   booked={stop.booked}
                   isNew={stop.id === lastAddedId}
+                  canMoveUp={index > 0}
+                  canMoveDown={index < day.stops.length - 1}
                 />
               ))}
             </ul>

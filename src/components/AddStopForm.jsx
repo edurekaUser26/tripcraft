@@ -1,19 +1,25 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Button from "./Button.jsx";
+import { TripContext } from "../features/trip/TripContext.jsx";
 
 const emptyForm = { name: "", time: "", day: "1" };
 
-function AddStopForm({ days, onAddStop }) {
+function AddStopForm({ days }) {
+  const { dispatch } = useContext(TripContext);
   const [form, setForm] = useState(emptyForm);
   const nameInputRef = useRef(null);
 
   function handleSubmit(event) {
     event.preventDefault();
-    onAddStop(Number(form.day), {
-      id: crypto.randomUUID(),
-      time: form.time,
-      name: form.name,
-      booked: false,
+    dispatch({
+      type: "added_stop",
+      dayNumber: Number(form.day),
+      stop: {
+        id: crypto.randomUUID(),
+        time: form.time,
+        name: form.name,
+        booked: false,
+      },
     });
     setForm({ ...emptyForm, day: form.day });
     nameInputRef.current.focus({ preventScroll: true });

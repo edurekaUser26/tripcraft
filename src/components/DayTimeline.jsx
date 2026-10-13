@@ -1,6 +1,6 @@
-import StopCard from './StopCard.jsx'
+import StopCard from "./StopCard.jsx";
 
-function DayTimeline({ days }) {
+function DayTimeline({ days, lastAddedId }) {
   return (
     <ol className="space-y-6">
       {days.map((day) => (
@@ -9,7 +9,13 @@ function DayTimeline({ days }) {
           {day.stops.length > 0 ? (
             <ul className="mt-2 space-y-2">
               {day.stops.map((stop) => (
-                <StopCard key={stop.id} time={stop.time} name={stop.name} booked={stop.booked} />
+                <StopCard
+                  key={stop.id}
+                  time={stop.time}
+                  name={stop.name}
+                  booked={stop.booked}
+                  isNew={stop.id === lastAddedId}
+                />
               ))}
             </ul>
           ) : (
@@ -18,7 +24,7 @@ function DayTimeline({ days }) {
         </li>
       ))}
     </ol>
-  )
+  );
 }
 
-export default DayTimeline
+export default DayTimeline;

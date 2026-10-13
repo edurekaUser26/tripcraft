@@ -1,6 +1,7 @@
 export const trip = {
   destination: 'Lisbon',
   startDate: '12 May 2027',
+  departure: '2027-05-12T09:00:00',
   travellers: 2,
   notes: 'Pack comfortable shoes for the hills.',
 }

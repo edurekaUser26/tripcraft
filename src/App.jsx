@@ -2,6 +2,7 @@ import AppHeader from "./components/AppHeader.jsx";
 import TripSummary from "./components/TripSummary.jsx";
 import DayTimeline from "./components/DayTimeline.jsx";
 import TripStats from "./components/TripStats.jsx";
+import SavedPlaces from "./components/SavedPlaces.jsx";
 
 function App() {
   return (
@@ -13,7 +14,10 @@ function App() {
           <TripStats />
         </div>
 
-        <TripSummary />
+        <div className="space-y-6">
+          <TripSummary />
+          <SavedPlaces />
+        </div>
 
         <div className="md:col-span-2">
           <DayTimeline />

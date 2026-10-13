@@ -21,3 +21,27 @@ export const days = [
   },
   { number: 3, stops: [] },
 ]
+
+export const savedPlaces = [
+  {
+    id: 'pasteis-de-belem',
+    name: 'Pastéis de Belém',
+    image: '/images/pasteis-de-belem.jpg',
+    imageAlt: 'Custard tarts dusted with cinnamon',
+    tags: ['Bakery', 'Belém'],
+  },
+  {
+    id: 'lx-factory',
+    name: 'LX Factory',
+    image: '/images/lx-factory.jpg',
+    imageAlt: 'Shops inside a converted red-brick factory',
+    tags: ['Shops', 'Alcântara'],
+  },
+  {
+    id: 'miradouro-santa-luzia',
+    name: 'Miradouro de Santa Luzia',
+    image: '/images/santa-luzia.jpg',
+    imageAlt: 'Terracotta rooftops above the river at a tiled viewpoint',
+    tags: ['Viewpoint', 'Alfama'],
+  },
+]

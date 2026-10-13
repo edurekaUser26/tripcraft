@@ -3,6 +3,7 @@ import TripSummary from "./components/TripSummary.jsx";
 import DayTimeline from "./components/DayTimeline.jsx";
 import TripStats from "./components/TripStats.jsx";
 import SavedPlaces from "./components/SavedPlaces.jsx";
+import DestinationList from "./components/DestinationList.jsx";
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
           <SavedPlaces />
         </div>
 
-        <div className="md:col-span-2">
-          <DayTimeline />
+        <div className="md:col-span-3">
+          <DestinationList />
         </div>
       </main>
     </div>

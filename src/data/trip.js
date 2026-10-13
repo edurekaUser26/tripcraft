@@ -45,3 +45,9 @@ export const savedPlaces = [
     tags: ['Viewpoint', 'Alfama'],
   },
 ]
+
+export const destinations = [
+     { id: 'lisbon', name: 'Lisbon', country: 'Portugal', summary: 'Hilly streets, historic trams, and riverside viewpoints.', nights: 2 },
+     { id: 'sintra', name: 'Sintra', country: 'Portugal', summary: 'Forested hills dotted with palaces and gardens.', nights: 2 },
+     { id: 'cascais', name: 'Cascais', country: 'Portugal', summary: 'A seaside town with beaches and a coastal path.' },
+   ]

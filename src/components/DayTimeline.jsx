@@ -1,4 +1,5 @@
-import { days } from '../data/trip.js'
+import { days } from "../data/trip.js";
+import StopCard from "./StopCard.jsx";
 
 function DayTimeline() {
   return (
@@ -13,22 +14,12 @@ function DayTimeline() {
             {day.stops.length > 0 ? (
               <ul className="mt-2 space-y-2">
                 {day.stops.map((stop) => (
-                  <li
+                  <StopCard
                     key={stop.id}
-                    className="flex gap-4 rounded bg-white p-3 shadow-sm"
-                  >
-                    <span className="text-slate-500">{stop.time}</span>
-                    <span className="flex-1">{stop.name}</span>
-                    <span
-                      className={
-                        stop.booked
-                          ? 'text-green-700'
-                          : 'text-slate-400'
-                      }
-                    >
-                      {stop.booked ? 'Booked' : 'Not booked'}
-                    </span>
-                  </li>
+                    time={stop.time}
+                    name={stop.name}
+                    booked={stop.booked}
+                  />
                 ))}
               </ul>
             ) : (
@@ -40,7 +31,7 @@ function DayTimeline() {
         ))}
       </ol>
     </section>
-  )
+  );
 }
 
-export default DayTimeline
+export default DayTimeline;

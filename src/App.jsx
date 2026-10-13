@@ -20,6 +20,10 @@ function App() {
           <SavedPlaces />
         </div>
 
+        <div className="md:col-span-2">
+          <DayTimeline />
+        </div>
+
         <div className="md:col-span-3">
           <DestinationList />
         </div>

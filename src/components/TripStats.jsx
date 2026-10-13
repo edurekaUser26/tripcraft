@@ -1,14 +1,12 @@
-import { days } from '../data/trip.js'
-
-function TripStats() {
-  const stops = days.flatMap((day) => day.stops)
-  const bookedCount = stops.filter((stop) => stop.booked).length
+function TripStats({ itinerary }) {
+  const stops = itinerary.flatMap((day) => day.stops);
+  const bookedCount = stops.filter((stop) => stop.booked).length;
 
   const stats = [
-    { label: 'Days', value: days.length },
-    { label: 'Stops', value: stops.length },
-    { label: 'Booked', value: bookedCount },
-  ]
+    { label: "Days", value: itinerary.length },
+    { label: "Stops", value: stops.length },
+    { label: "Booked", value: bookedCount },
+  ];
 
   return (
     <section
@@ -26,7 +24,7 @@ function TripStats() {
         ))}
       </dl>
     </section>
-  )
+  );
 }
 
-export default TripStats
+export default TripStats;

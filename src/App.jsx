@@ -11,7 +11,7 @@ import DayFilter from "./components/DayFilter.jsx";
 import DepartureCountdown from "./components/DepartureCountdown.jsx";
 import { trip } from "./data/trip.js";
 import { TripContext } from "./features/trip/TripContext.jsx";
-import useLocalStorage from "./hooks/useLocalStorage.js";
+import {useLocalStorage} from "./hooks/useLocalStorage.js";
 
 function App() {
   const { state } = useContext(TripContext);

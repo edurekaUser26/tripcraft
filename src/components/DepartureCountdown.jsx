@@ -1,5 +1,5 @@
 import { trip } from "../data/trip.js";
-import useCountdown from "../hooks/useCountdown.js";
+import { useCountdown } from '../hooks/useCountdown'
 
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;

@@ -18,3 +18,12 @@
 | 1 | Interval callback used msLeft from the first render, so the countdown froze | Stale closures | Recalculate from targetDate on each tick; added targetDate to the dependency array |
 | 2 | setInterval was never cleared | Effect cleanup | Returned () => clearInterval(intervalId) |
 | 3 | useLocalStorage reads storage once with a lazy initializer and saves on change | Confirmed correct | No change needed |
+
+## Week 3: TanStack Query migration (Claude Code, plan mode)
+
+| # | Change | Decision | Reason |
+|---|---|---|---|
+| 1 | QueryClient in main.jsx, outside components | Accepted | One shared cache for the whole app |
+| 2 | useTrips with signal and key ['trips'] | Accepted | Matches the plan; cancellation built in |
+| 3 | useDestination with two useSuspenseQuery calls | Rejected, corrected | Caused a request waterfall; changed to useSuspenseQueries |
+| 4 | QueryBoundary with reset wired to Try again | Accepted | Retry resets both the boundary and the query |

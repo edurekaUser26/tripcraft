@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { trip } from "../data/trip.js";
+import useCountdown from "../hooks/useCountdown.js";
 
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
@@ -7,16 +7,7 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
 function DepartureCountdown() {
-  const [now, setNow] = useState(Date.now());
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setNow(Date.now());
-    }, SECOND);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const msLeft = Math.max(0, new Date(trip.departure).getTime() - now);
+  const msLeft = useCountdown(trip.departure);
   const days = Math.floor(msLeft / DAY);
   const hours = Math.floor((msLeft % DAY) / HOUR);
   const minutes = Math.floor((msLeft % HOUR) / MINUTE);

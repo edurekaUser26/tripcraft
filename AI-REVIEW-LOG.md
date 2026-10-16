@@ -10,3 +10,11 @@
 | 4 | Index used as key; tags had no key | Lists with stable keys | key={place.id} and key={tag} |
 | 5 | img had no alt text | Accessibility: alt text | Added imageAlt to the data |
 | 6 | Input had only a placeholder | Accessibility: form labels | Added a label linked with htmlFor |
+
+## Week 2: useCountdown and useLocalStorage (Claude Code extraction)
+
+| # | Issue found | Week 2 concept | Correction |
+|---|---|---|---|
+| 1 | Interval callback used msLeft from the first render, so the countdown froze | Stale closures | Recalculate from targetDate on each tick; added targetDate to the dependency array |
+| 2 | setInterval was never cleared | Effect cleanup | Returned () => clearInterval(intervalId) |
+| 3 | useLocalStorage reads storage once with a lazy initializer and saves on change | Confirmed correct | No change needed |

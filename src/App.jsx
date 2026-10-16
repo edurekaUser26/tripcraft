@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import AppHeader from "./components/AppHeader.jsx";
 import TripSummary from "./components/TripSummary.jsx";
 import DayTimeline from "./components/DayTimeline.jsx";
@@ -11,11 +11,15 @@ import DayFilter from "./components/DayFilter.jsx";
 import DepartureCountdown from "./components/DepartureCountdown.jsx";
 import { trip } from "./data/trip.js";
 import { TripContext } from "./features/trip/TripContext.jsx";
+import useLocalStorage from "./hooks/useLocalStorage.js";
 
 function App() {
   const { state } = useContext(TripContext);
   const itinerary = state.days;
-  const [selectedDay, setSelectedDay] = useState("all");
+  const [selectedDay, setSelectedDay] = useLocalStorage(
+    "tripcraft:selectedDay",
+    "all",
+  );
   const visibleDays =
     selectedDay === "all"
       ? itinerary

@@ -3,6 +3,9 @@ export const trip = {
   destination: "Lisbon",
   startDate: "12 May 2027",
   departure: "2027-05-12T09:00:00",
+  countryCode: "PT",
+  latitude: 38.72,
+  longitude: -9.14,
   travellers: 2,
   notes: "Pack comfortable shoes for the hills.",
 };
@@ -80,5 +83,3 @@ export const destinations = [
     summary: "A seaside town with beaches and a coastal path.",
   },
 ];
-
-export const trips = [trip];

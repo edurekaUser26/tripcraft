@@ -1,6 +1,5 @@
-import Button from "./Button.jsx";
-
-function DestinationCard({ name, country, summary, nights = 1 }) {
+import { Link } from "react-router";
+function DestinationCard({ id, name, country, summary, nights = 1 }) {
   return (
     <article className="rounded-lg bg-white p-5 shadow-sm">
       <h3 className="text-lg font-semibold">{name}</h3>
@@ -9,7 +8,12 @@ function DestinationCard({ name, country, summary, nights = 1 }) {
       </p>
       <p className="mt-2 text-slate-600">{summary}</p>
       <div className="mt-4">
-        <Button variant="secondary">View details</Button>
+        <Link
+          to={`destinations/${id}`}
+          className="inline-block rounded border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+        >
+          View details<span className="sr-only"> about {name}</span>
+        </Link>
       </div>
     </article>
   );

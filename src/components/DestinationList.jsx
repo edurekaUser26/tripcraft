@@ -9,6 +9,7 @@ function DestinationList() {
         {destinations.map((destination) => (
           <li key={destination.id}>
             <DestinationCard
+              id={destination.id}
               name={destination.name}
               country={destination.country}
               summary={destination.summary}

@@ -2,11 +2,7 @@ import { trip } from '../data/trip.js'
 import { useDestination } from '../hooks/useDestination.js'
 
 function TripConditions() {
-  const { data: { country, daily } } = useDestination({
-    countryCode: trip.countryCode,
-    latitude: trip.latitude,
-    longitude: trip.longitude,
-  })
+  const { country, daily } = useDestination(trip)
   const currency = country.currencies[0]
   const languages = country.languages.map((language) => language.name).join(', ')
 

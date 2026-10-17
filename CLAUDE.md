@@ -25,6 +25,7 @@ TripCraft is a trip itinerary viewer. It has no state, routing, or backend yet.
 - `src/data/trip.js` is the single source of data. It exports `trip` (destination, start date, traveller count, notes) and `days` (an array of `{ number, stops: [{ id, time, name, booked }] }`).
 - Components in `src/components/` import that data directly instead of receiving it as props. `TripSummary` reads `trip` and `days`, and `DayTimeline` reads `days`. If data needs to become dynamic, lift it into `App` and pass it down as props.
 - `App.jsx` handles only layout: a full-width `AppHeader`, then a responsive grid in which `TripSummary` takes one column and `DayTimeline` spans two at `md:` and above. On smaller screens they stack.
+- Data fetching uses TanStack Query. One `QueryClient` (retry once) is created in `src/main.jsx`. Requests go through `fetchJson(url, { signal })` in `src/api/fetchJson.js`, which throws on non-OK responses. Hooks in `src/hooks/` (`useTrips`, `useDestination`) call `useSuspenseQuery` and pass TanStack's `signal` to it. Any component that uses them must render inside `QueryBoundary` (`src/components/QueryBoundary.jsx`), which provides the loading fallback and an error state with a Try again button.
 - List keys use `day.number` for days and `stop.id` (a kebab-case slug) for stops. A new stop needs a unique `id`.
 
 ## Conventions

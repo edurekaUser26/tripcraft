@@ -1,52 +1,12 @@
-import { useEffect, useState } from 'react'
 import { trip } from '../data/trip.js'
+import { useDestination } from '../hooks/useDestination.js'
 
 function TripConditions() {
-  const [conditions, setConditions] = useState(null)
-  const [status, setStatus] = useState('loading')
-
-  useEffect(() => {
-    const controller = new AbortController()
-    const { signal } = controller
-
-    async function loadConditions() {
-      try {
-        const countryUrl = `/restcountries/countries/v5/codes.alpha_2/${trip.countryCode}?response_fields=names.common,capitals,currencies,languages`
-        const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${trip.latitude}&longitude=${trip.longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=3`
-
-        const [countryResponse, forecastResponse] = await Promise.all([
-          fetch(countryUrl, { signal }),
-          fetch(forecastUrl, { signal }),
-        ])
-        if (!countryResponse.ok || !forecastResponse.ok) {
-          throw new Error('A request failed')
-        }
-
-        const [countries, forecast] = await Promise.all([
-          countryResponse.json(),
-          forecastResponse.json(),
-        ])
-        setConditions({ country: countries.data.objects[0], daily: forecast.daily })
-        setStatus('success')
-      } catch (error) {
-        if (error.name === 'AbortError') return
-        setStatus('error')
-      }
-    }
-
-    loadConditions()
-    return () => controller.abort()
-  }, [])
-
-  if (status === 'loading') {
-    return <p role="status" className="rounded-lg bg-white p-6 text-slate-500 shadow-sm">Loading country and weather…</p>
-  }
-
-  if (status === 'error') {
-    return <p role="alert" className="rounded-lg bg-red-50 p-6 text-red-700">We couldn't load country and weather details.</p>
-  }
-
-  const { country, daily } = conditions
+  const { data: { country, daily } } = useDestination({
+    countryCode: trip.countryCode,
+    latitude: trip.latitude,
+    longitude: trip.longitude,
+  })
   const currency = country.currencies[0]
   const languages = country.languages.map((language) => language.name).join(', ')
 

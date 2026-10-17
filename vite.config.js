@@ -1,29 +1,24 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
+import { defineConfig, loadEnv } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
 
-  server: {
-    proxy: {
-      "/api/countries": {
-        target: "https://restcountries.com",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/countries/, "/v3.1"),
-      },
-      "/api/weather": {
-        target: "https://api.open-meteo.com",
-        changeOrigin: true,
-        secure: true,
-        timeout: 10000,
-        proxyTimeout: 10000,
-        rewrite: (path) => path.replace(/^\/api\/weather/, "/v1/forecast"),
+  return {
+    plugins: [react(), tailwindcss()],
+    server: {
+      proxy: {
+        '/restcountries': {
+          target: 'https://api.restcountries.com',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/restcountries/, ''),
+          headers: { Authorization: `Bearer ${env.RESTCOUNTRIES_API_KEY}` },
+          configure: (proxy) => {
+            proxy.on('proxyReq', (proxyReq) => proxyReq.removeHeader('origin'))
+          },
+        },
       },
     },
-  },
-
-  test: {
-    environment: "jsdom",
-  },
-});
+  }
+})

@@ -10,7 +10,6 @@ import AddStopForm from "../components/AddStopForm.jsx";
 import DayFilter from "../components/DayFilter.jsx";
 import DepartureCountdown from "../components/DepartureCountdown.jsx";
 import TripConditions from "../components/TripConditions.jsx";
-import QueryBoundary from "../components/QueryBoundary.jsx";
 import { useLocalStorage } from "../hooks/useLocalStorage.js";
 import { trip } from "../data/trip.js";
 import { TripContext } from "../features/trip/TripContext.jsx";
@@ -48,9 +47,7 @@ function TripPage() {
       <div className="space-y-6">
         <DepartureCountdown />
         <TripSummary />
-        <QueryBoundary loadingMessage="Loading country and weather…">
-          <TripConditions />
-        </QueryBoundary>
+        <TripConditions />
         <SavedPlaces />
       </div>
       <div className="md:col-span-2">

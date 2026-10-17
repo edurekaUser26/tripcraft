@@ -1,7 +1,7 @@
 import { http, HttpResponse, delay } from 'msw'
 
 const trips = [
-  { id: 'lisbon', destination: 'Lisbon', startDate: '12 May 2027' },
+  { id: 'lisbon', destination: 'Lisbon', startDate: '2027-05-12' },
 ]
 
 function shouldFail() {
@@ -27,5 +27,16 @@ export const handlers = [
       return HttpResponse.json({ message: 'Trip not found' }, { status: 404 })
     }
     return HttpResponse.json(trip)
+  }),
+
+  http.post('/api/trips', async ({ request }) => {
+    await delay(1200)
+    if (shouldFail()) {
+      return HttpResponse.json({ message: 'Could not save the trip' }, { status: 500 })
+    }
+    const body = await request.json()
+    const newTrip = { id: crypto.randomUUID(), ...body }
+    trips.push(newTrip)
+    return HttpResponse.json(newTrip, { status: 201 })
   }),
 ]
